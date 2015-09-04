@@ -16,125 +16,119 @@ public class App {
       model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
-//
-//     /* Index --> Categories*/
-//     get("/categories", (request, response) -> {
-//       HashMap<String, Object> model = new HashMap<String, Object>();
-//       List<Category> categories = Category.all();
-//       model.put("categories", categories);
-//       model.put("template", "templates/categories.vtl");
-//       return new ModelAndView(model, layout);
-//     }, new VelocityTemplateEngine());
-//
-//     /* Category list/form --> POST a new category */
-//     post("/categories", (request, response) -> {
-//       HashMap<String, Object> model = new HashMap<String, Object>();
-//       String name = request.queryParams("name");
-//       Category newCategory = new Category(name);
-//       newCategory.save();
-//       response.redirect("/categories");
-//       return null;
-//     });
-//
-//     /* Category list/form --> See a particular category */
-//     get("/categories/:id", (request,response) ->{
-//       HashMap<String, Object> model = new HashMap<String, Object>();
-//       int id = Integer.parseInt(request.params(":id"));
-//       Category category = Category.find(id);
-//       model.put("category", category);
-//       model.put("allTasks", Task.all());
-//       model.put("template", "templates/category.vtl");
-//       return new ModelAndView(model, layout);
-//     }, new VelocityTemplateEngine());
-//
-//     /* Task list/form --> POST a new task */
-//     post("/tasks", (request, response) -> {
-//       HashMap<String, Object> model = new HashMap<String, Object>();
-//       String description = request.queryParams("description");
-//       String due_date = request.queryParams("due_date");
-//       boolean is_completed =  Boolean.parseBoolean(request.queryParams("is_completed"));
-//       Task newTask = new Task(description, due_date, is_completed);
-//       newTask.save();
-//       response.redirect("/tasks");
-//       return null;
-//     });
-//
-//     /* Index --> Tasks*/
-//     get("/tasks", (request, response) -> {
-//       HashMap<String, Object> model = new HashMap<String, Object>();
-//       List<Task> tasks = Task.all();
-//       model.put("tasks", tasks);
-//       model.put("template", "templates/tasks.vtl");
-//       return new ModelAndView(model, layout);
-//     }, new VelocityTemplateEngine());
-//
-//     /* Category page --> POST a task to this category */
-//     post("/add_tasks", (request, response) -> {
-//       int taskId = Integer.parseInt(request.queryParams("task_id"));
-//       int categoryId = Integer.parseInt(request.queryParams("category_id"));
-//       Category category = Category.find(categoryId);
-//       Task task = Task.find(taskId);
-//       category.addTask(task);
-//       response.redirect("/categories/" + categoryId);
-//       return null;
-//     });
-//
-//     get("/tasks/:id", (request,response) -> {
-//       HashMap<String, Object> model = new HashMap<String, Object>();
-//       int id = Integer.parseInt(request.params(":id"));
-//       Task task = Task.find(id);
-//       model.put("task", task);
-//       model.put("allCategories", Category.all());
-//       model.put("template", "templates/task.vtl");
-//       return new ModelAndView(model, layout);
-//     }, new VelocityTemplateEngine());
-//
-//
-//
-//     /* Task page --> POST a category to this task */
-//     post("/add_categories", (request, response) -> {
-//       int taskId = Integer.parseInt(request.queryParams("task_id"));
-//       int categoryId = Integer.parseInt(request.queryParams("category_id"));
-//       Category category = Category.find(categoryId);
-//       Task task = Task.find(taskId);
-//       task.addCategory(category);
-//       response.redirect("/tasks/" + taskId);
-//       return null;
-//     });
-//
-//     get("/tasks/:id/edit", (request, response) -> {
-//       HashMap<String, Object> model = new HashMap<String, Object>();
-//       Task task = Task.find(Integer.parseInt(request.params("id")));
-//       //String new_task_name = request.queryParams("new_task_name");
-//       //task.update("new_task_name");
-//       model.put("task", task);
-//       model.put("template", "templates/tasks-edit-form.vtl");
-//       return new ModelAndView(model, layout);
-//     }, new VelocityTemplateEngine());
-//
-//     post("/tasks/:id/edit", (request, response) -> {
-//       HashMap<String, Object> model = new HashMap<String, Object>();
-//
-//       Task task = Task.find(Integer.parseInt(request.params(":id")));
-//       String new_task_name = request.queryParams("new_task_name");
-//       boolean is_completed =  Boolean.parseBoolean(request.queryParams("is_completed"));
-//       task.update(new_task_name);
-//       task.updateIsCompleted(is_completed);
-//
-//       model.put("tasks",Task.all());
-//       model.put("task", task);
-//       model.put("template", "templates/tasks.vtl");
-//       return new ModelAndView(model, layout);
-//     }, new VelocityTemplateEngine());
-//
-//     get("/tasks/:id/delete", (request, response) -> {
-//       HashMap<String, Object> model = new HashMap<String, Object>();
-//       Task task = Task.find(Integer.parseInt(request.params("id")));
-//       task.delete();
-//       response.redirect("/tasks");
-//       return null;
-//
-//     });
-//
+
+    /* Index --> Stores*/
+    get("/stores", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      List<Store> stores = Store.all();
+      model.put("stores", stores);
+      model.put("template", "templates/stores.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    /* Store list/form --> POST a new store */
+    post("/stores", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      String name = request.queryParams("name");
+      Store newStore = new Store(name);
+      newStore.save();
+      response.redirect("/stores");
+      return null;
+    });
+
+    /* Store list/form --> See a particular store */
+    get("/stores/:id", (request,response) ->{
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      int id = Integer.parseInt(request.params(":id"));
+      Store store = Store.find(id);
+      model.put("store", store);
+      model.put("allBrands", Brand.all());
+      model.put("template", "templates/store.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    /* Brand list/form --> POST a new brand */
+    post("/brands", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      String name = request.queryParams("name");
+      Brand newBrand = new Brand(name);
+      newBrand.save();
+      response.redirect("/brands");
+      return null;
+    });
+
+    /* Index --> Brands*/
+    get("/brands", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      List<Brand> brands = Brand.all();
+      model.put("brands", brands);
+      model.put("template", "templates/brands.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    /* Store page --> POST a brand to this store */
+    post("/add_brands", (request, response) -> {
+      int brandId = Integer.parseInt(request.queryParams("brand_id"));
+      int storeId = Integer.parseInt(request.queryParams("store_id"));
+      Store store = Store.find(storeId);
+      Brand brand = Brand.find(brandId);
+      store.addBrand(brand);
+      response.redirect("/stores/" + storeId);
+      return null;
+    });
+
+    get("/brands/:id", (request,response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      int id = Integer.parseInt(request.params(":id"));
+      Brand brand = Brand.find(id);
+      model.put("brand", brand);
+      model.put("allStores", Store.all());
+      model.put("template", "templates/brand.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+
+
+    /* Brand page --> POST a store to this brand */
+    post("/add_stores", (request, response) -> {
+      int brandId = Integer.parseInt(request.queryParams("brand_id"));
+      int storeId = Integer.parseInt(request.queryParams("store_id"));
+      Store store = Store.find(storeId);
+      Brand brand = Brand.find(brandId);
+      brand.addStore(store);
+      response.redirect("/brands/" + brandId);
+      return null;
+    });
+
+    get("/stores/:id/edit", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      Store store = Store.find(Integer.parseInt(request.params("id")));
+      model.put("store", store);
+      model.put("template", "templates/stores-edit-form.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/stores/:id/edit", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+
+      Store store = Store.find(Integer.parseInt(request.params(":id")));
+      String new_name = request.queryParams("new_name");
+      store.update(new_name);
+
+      model.put("stores",Store.all());
+      model.put("store", store);
+      model.put("template", "templates/store.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/stores/:id/delete", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      Store store = Store.find(Integer.parseInt(request.params("id")));
+      store.delete();
+      response.redirect("/stores");
+      return null;
+
+    });
+
   }
 }
