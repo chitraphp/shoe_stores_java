@@ -30,7 +30,7 @@ public class Store {
 
 
   public static List<Store> all() {
-    String sql = "SELECT * FROM stores ORDER BY due_date ASC";
+    String sql = "SELECT * FROM stores";
     try(Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(Store.class);
     }
@@ -92,7 +92,7 @@ public class Store {
 
     public List<Brand> getBrands() {
       try(Connection con = DB.sql2o.open()) {
-        String sql = "SELECT brands.* FROM stores JOIN stores_brands ON (stores_brands.store_id = stores.id) JOIN brands ON (stores_brands.brand_id = brands.id) WHERE store_id=:id ORDER BY due_date ASC";
+        String sql = "SELECT brands.* FROM stores JOIN stores_brands ON (stores_brands.store_id = stores.id) JOIN brands ON (stores_brands.brand_id = brands.id) WHERE store_id=:id ";
         return con.createQuery(sql)
         .addParameter("id", id)
         .executeAndFetch(Brand.class);

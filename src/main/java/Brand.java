@@ -69,7 +69,7 @@ public class Brand {
 
   public List<Store> getStores() {
   try(Connection con = DB.sql2o.open()) {
-    String sql = "SELECT stores.* FROM brands JOIN stores_brands ON (stores_brands.brand_id = brands.id) JOIN stores ON (stores_brands.store_id = stores.id) WHERE brand_id=:id ORDER BY due_date ASC";
+    String sql = "SELECT stores.* FROM brands JOIN stores_brands ON (stores_brands.brand_id = brands.id) JOIN stores ON (stores_brands.store_id = stores.id) WHERE brand_id=:id ";
     return con.createQuery(sql)
       .addParameter("id", id)
       .executeAndFetch(Store.class);
