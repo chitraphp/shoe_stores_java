@@ -57,6 +57,7 @@ public class Store {
   }
 
   public void update(String name) {
+    this.name = name;
     try(Connection con = DB.sql2o.open()) {
       String sql = "UPDATE stores SET name = :name WHERE id = :id";
       con.createQuery(sql)

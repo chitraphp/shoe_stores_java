@@ -104,7 +104,7 @@ public class App {
       HashMap<String, Object> model = new HashMap<String, Object>();
       Store store = Store.find(Integer.parseInt(request.params("id")));
       model.put("store", store);
-      model.put("template", "templates/stores-edit-form.vtl");
+      model.put("template", "templates/store-edit-form.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
